@@ -1,18 +1,40 @@
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class State {
     Integer[][] board;
     int size;
     State parentBoard;
-    Operators operationToMe;
+    Enums.Operators operationToMe;
     Integer x_empty;
     Integer y_empty;
+
     public State() {
 
     }
 
-    public State(State parentBoard, Operators operation) {
+    public void initEmpty() {
+        for (Integer i = 0; i < size; i++) {
+            for (Integer j = 0; j <size; j++) {
+                if (this.board[i][j] == 0) {
+                    x_empty = i;
+                    y_empty = j;
+                }
+            }
+        }
+    }
+
+    public State getParent() {
+        return parentBoard;
+    }
+
+    public Enums.Operators getOperationToMe() {
+        return this.operationToMe;
+    }
+
+    public State(State parentBoard, Enums.Operators operation) {
         this.size = parentBoard.size;
         this.operationToMe = operation;
         this.parentBoard = parentBoard;
@@ -33,23 +55,32 @@ public class State {
             }
         }
         ChangeBoardByOperation.MoveBoardByOperation(this, this.operationToMe, x_empty_input, y_empty_input);
+        initEmpty();
     }
 
-    public ArrayList<Operators> getValidOperators() {
-        ArrayList<Operators> validOperator = new ArrayList<>();
+    public ArrayList<Enums.Operators> getValidOperators() {
+        ArrayList<Enums.Operators> validOperator = new ArrayList<>();
         if (x_empty > 0) {
-            validOperator.add(Operators.UP);
+            validOperator.add(Enums.Operators.UP);
         }
-        if (x_empty < size) {
-            validOperator.add(Operators.DOWN);
+        if (x_empty < size -1 ) {
+            validOperator.add(Enums.Operators.DOWN);
         }
-        if (y_empty < size) {
-            validOperator.add(Operators.RIGHT);
+        if (y_empty < size -1) {
+            validOperator.add(Enums.Operators.RIGHT);
         }
         if (y_empty > 0) {
-            validOperator.add(Operators.LEFT);
+            validOperator.add(Enums.Operators.LEFT);
         }
         return validOperator;
+    }
+
+    public List<State> getSuccessors() {
+        List<State> successors = new ArrayList<>();
+        for (Enums.Operators operator : getValidOperators()) {
+            successors.add(new State(this, operator));
+        }
+        return successors;
     }
 
 
@@ -66,8 +97,20 @@ public class State {
             }
         }
         if (this.x_empty!= size-1 || this.y_empty!=size-1) {
+
             isGoal = false;
         }
         return isGoal;
+    }
+
+    public static boolean compareStates(State state1, State state2) {
+        for (int i = 0; i < state1.size; i++) {
+            for (int j = 0; j < state2.size; j++) {
+                if (state1.board[i][j] != state2.board[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
