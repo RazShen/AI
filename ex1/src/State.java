@@ -10,7 +10,7 @@ public class State {
     Enums.Operators operationToMe;
     Integer x_empty;
     Integer y_empty;
-
+    Integer depth;
     public State() {
 
     }
@@ -36,6 +36,7 @@ public class State {
 
     public State(State parentBoard, Enums.Operators operation) {
         this.size = parentBoard.size;
+        this.depth = parentBoard.depth +1;
         this.operationToMe = operation;
         this.parentBoard = parentBoard;
         copyBoardAndOperate(parentBoard.board);
@@ -43,34 +44,34 @@ public class State {
 
     private void copyBoardAndOperate(Integer[][] inputBoard) {
         board = new Integer[size][size];
-        int x_empty_input = 0;
-        int y_empty_input = 0;
+        int xEmptyParent = 0;
+        int yEmptyParent = 0;
         for (Integer i = 0; i < size; i++) {
             for (Integer j = 0; j <size; j++) {
                 board[i][j] = inputBoard[i][j];
                 if (inputBoard[i][j] == 0) {
-                    x_empty_input = i;
-                    y_empty_input = j;
+                    xEmptyParent = i;
+                    yEmptyParent = j;
                 }
             }
         }
-        ChangeBoardByOperation.MoveBoardByOperation(this, this.operationToMe, x_empty_input, y_empty_input);
+        ChangeBoardByOperation.MoveBoardByOperation(this, this.operationToMe, xEmptyParent, yEmptyParent);
         initEmpty();
     }
 
     public ArrayList<Enums.Operators> getValidOperators() {
         ArrayList<Enums.Operators> validOperator = new ArrayList<>();
-        if (x_empty > 0) {
+        if (x_empty < size -1 ) {
             validOperator.add(Enums.Operators.UP);
         }
-        if (x_empty < size -1 ) {
+        if (x_empty > 0) {
             validOperator.add(Enums.Operators.DOWN);
         }
         if (y_empty < size -1) {
-            validOperator.add(Enums.Operators.RIGHT);
+            validOperator.add(Enums.Operators.LEFT);
         }
         if (y_empty > 0) {
-            validOperator.add(Enums.Operators.LEFT);
+            validOperator.add(Enums.Operators.RIGHT);
         }
         return validOperator;
     }
