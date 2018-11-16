@@ -3,9 +3,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class BFS extends AbstractSolivngAlgorithms {
+/**
+ * Class for the BFS algorithm.
+ */
+public class BFS extends AbstractSolvingAlgorithms {
     public Queue<State> openList;
 
+
+    /**
+     * This function searches the graph for the goal state using a queue.
+     *
+     * @return true/false found/didn't found a goal state.
+     */
     public boolean search() {
         this.openList.add(currentState);
         while (!openList.isEmpty()) {
@@ -17,6 +26,7 @@ public class BFS extends AbstractSolivngAlgorithms {
             }
             List<State> successors = this.currentState.getSuccessors();
             for (State state : successors) {
+                // for checking closed list.
 //                boolean existsInClosedList = false;
 //                for (State exploredState : closedList) {
 //                    if (State.compareStates(state, exploredState)) {
@@ -24,12 +34,18 @@ public class BFS extends AbstractSolivngAlgorithms {
 //                    }
 //                }
 //                if (!existsInClosedList) {
-                    this.openList.add(state);
+                this.openList.add(state);
             }
         }
         return false;
     }
 
+    /**
+     * BFS constructor.
+     *
+     * @param rootBoard from input.txt
+     * @param size      of the board.
+     */
     public BFS(Integer[][] rootBoard, int size) {
         State rootState = new State();
         rootState.size = size;
@@ -39,7 +55,7 @@ public class BFS extends AbstractSolivngAlgorithms {
         rootState.initEmpty();
         this.openList = new LinkedList<>();
         this.closedList = new ArrayList<>();
-        this.currentState =rootState;
+        this.currentState = rootState;
         this.cost = 0;
     }
 

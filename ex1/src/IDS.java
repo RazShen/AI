@@ -1,8 +1,18 @@
 import java.util.*;
 
-public class IDS extends AbstractSolivngAlgorithms {
+/**
+ * Class for the IDS algorithm.
+ */
+public class IDS extends AbstractSolvingAlgorithms {
     public Stack<State> openList;
     private State root;
+
+    /**
+     * This function searches the graph for the goal state using a stack.
+     * this function actually operate the searchIteration() with bigger length each time.
+     *
+     * @return true/false found/didn't found a goal state.
+     */
     public boolean search() {
         int limit = 0;
         while (!searchIteration(limit)) {
@@ -15,6 +25,12 @@ public class IDS extends AbstractSolivngAlgorithms {
         return true;
     }
 
+    /**
+     * Search the grapth by DFS with a limit (might be called more than once in the algorithm).
+     *
+     * @param limit for search depth.
+     * @return found/didn't found goal/
+     */
     public boolean searchIteration(int limit) {
         this.openList.push(currentState);
         while (!openList.isEmpty()) {
@@ -27,7 +43,7 @@ public class IDS extends AbstractSolivngAlgorithms {
             if (this.currentState.depth == limit)
                 continue;
             List<State> successors = this.currentState.getSuccessors();
-            for (int index = successors.size() -1; index >= 0; index--) {
+            for (int index = successors.size() - 1; index >= 0; index--) {
 //                boolean existsInClosedList = false;
 //                for (State exploredState : closedList) {
 //                    if (State.compareStates(state, exploredState)) {
@@ -40,6 +56,13 @@ public class IDS extends AbstractSolivngAlgorithms {
         }
         return false;
     }
+
+    /**
+     * IDS constructor.
+     *
+     * @param rootBoard from input.txt
+     * @param size      of the board.
+     */
     public IDS(Integer[][] rootBoard, int size) {
         State rootState = new State();
         rootState.size = size;
@@ -50,7 +73,7 @@ public class IDS extends AbstractSolivngAlgorithms {
         rootState.initEmpty();
         this.openList = new Stack<>();
         this.closedList = new ArrayList<>();
-        this.currentState =rootState;
+        this.currentState = rootState;
         this.cost = 0;
     }
 }
