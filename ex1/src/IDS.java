@@ -2,6 +2,7 @@ import java.util.*;
 
 /**
  * Class for the IDS algorithm.
+ * Using a regular stack (lifo)
  */
 public class IDS extends AbstractSolvingAlgorithms {
     public Stack<State> openList;

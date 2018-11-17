@@ -1,5 +1,6 @@
 /**
  * This class contains all the enums.
+ * To maintain order in the code.
  */
 public class Enums {
     public enum SolvingAlgorithms {

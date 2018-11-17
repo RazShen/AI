@@ -5,6 +5,7 @@ import java.util.Queue;
 
 /**
  * Class for the BFS algorithm.
+ * Using a normal queue (fifo)
  */
 public class BFS extends AbstractSolvingAlgorithms {
     public Queue<State> openList;

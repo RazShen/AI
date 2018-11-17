@@ -7,8 +7,9 @@ import java.util.stream.Collectors;
 
 /**
  * Main class of the program.
+ * parses the input.txt and
  */
-public class Main {
+public class java_ex1 {
     public static void main(String[] args) {
         String output = "output.txt";
         String input = "input.txt";

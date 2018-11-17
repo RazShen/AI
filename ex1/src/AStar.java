@@ -2,6 +2,7 @@ import java.util.*;
 
 /**
  * Class for the AStar algorithm.
+ * Uses best first search with f(n) = g(n) + h(n) and heuristics function of manhattan distance.
  */
 public class AStar extends AbstractSolvingAlgorithms {
     public PriorityQueue<State> openList;

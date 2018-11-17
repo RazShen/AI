@@ -1,5 +1,6 @@
 /**
  * This class purpose is to change the accepted board by the operation received.
+ * Contains 1 static method.
  */
 public class ChangeBoardByOperation {
     /**

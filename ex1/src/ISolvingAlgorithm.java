@@ -1,5 +1,6 @@
 /**
  * Interface for every searching algorithm.
+ * Contains all methods that each searching algorithm has.
  */
 public interface ISolvingAlgorithm {
     /**

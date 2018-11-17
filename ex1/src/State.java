@@ -3,6 +3,7 @@ import java.util.List;
 
 /**
  * This class represent a state (a node in the graph)
+ * a state contains a board, parent, operator from parent to board and depth.
  */
 public class State {
     Integer[][] board;

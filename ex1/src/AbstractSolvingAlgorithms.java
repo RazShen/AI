@@ -3,6 +3,7 @@ import java.util.List;
 
 /**
  * Class for abstract searching algorithm.
+ * Contains all methods that each searching algorithm has.
  */
 public abstract class AbstractSolvingAlgorithms implements ISolvingAlgorithm {
     protected List<State> closedList;
