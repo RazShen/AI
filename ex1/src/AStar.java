@@ -13,6 +13,9 @@ public class AStar extends AbstractSolvingAlgorithms {
      * @return true/false found/didn't found a goal state.
      */
     public boolean search() {
+        int time = 0;
+        currentState.timestamp = time;
+        time++;
         this.openList.add(currentState);
         while (!openList.isEmpty()) {
             State top = this.openList.remove();
@@ -23,7 +26,10 @@ public class AStar extends AbstractSolvingAlgorithms {
             }
             List<State> successors = this.currentState.getSuccessors();
             for (State state : successors) {
+                state.timestamp = time;
                 this.openList.add(state);
+                time++;
+
             }
         }
         return false;
@@ -42,6 +48,7 @@ public class AStar extends AbstractSolvingAlgorithms {
         rootState.board = rootBoard;
         rootState.depth = 0;
         rootState.parentBoard = null;
+        rootState.timestamp = 0;
         rootState.initEmpty();
         this.openList = new PriorityQueue<>(new ComparatorByManhattan());
         this.closedList = new ArrayList<>();
@@ -55,12 +62,7 @@ public class AStar extends AbstractSolvingAlgorithms {
      * By the f function of all the nodes in the path.
      */
     public int getSpecificCost() {
-        State temp = this.currentState;
-        while (temp != null) {
-            this.cost += f(temp);
-            temp = temp.getParent();
-        }
-        return this.cost;
+        return this.currentState.depth;
     }
 
     /**
@@ -71,6 +73,7 @@ public class AStar extends AbstractSolvingAlgorithms {
      */
     public int f(State board) {
         int sum = 0;
+
         int n = board.size;
         sum += board.depth;  //calculate g(n)
         for (int i = 0; i < n; i++) {
@@ -99,7 +102,12 @@ public class AStar extends AbstractSolvingAlgorithms {
          * Compare 2 nodes by f function.
          */
         public int compare(State board1, State board2) {
-            return f(board1) - f(board2);
+            int result =  f(board1) - f(board2);
+            if (result != 0) {
+                return result;
+            }
+            return board1.timestamp - board2.timestamp;
+
         }
 
     }
