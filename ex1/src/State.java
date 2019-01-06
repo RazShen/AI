@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,6 +14,9 @@ public class State {
     Integer x_empty;
     Integer y_empty;
     Integer depth;
+    int timestamp;
+
+
 
     /**
      * Empty constructor (used for root)

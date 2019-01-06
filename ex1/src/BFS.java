@@ -54,6 +54,7 @@ public class BFS extends AbstractSolvingAlgorithms {
         rootState.depth = 0;
         rootState.parentBoard = null;
         rootState.initEmpty();
+        rootState.timestamp = 0;
         this.openList = new LinkedList<>();
         this.closedList = new ArrayList<>();
         this.currentState = rootState;

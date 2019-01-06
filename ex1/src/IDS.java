@@ -70,6 +70,7 @@ public class IDS extends AbstractSolvingAlgorithms {
         rootState.board = rootBoard;
         rootState.depth = 0;
         rootState.parentBoard = null;
+        rootState.timestamp = 0;
         this.root = rootState;
         rootState.initEmpty();
         this.openList = new Stack<>();
