@@ -1,3 +1,5 @@
+import math
+
 def parse_file(labeled_file_path):
     """
     Parse the file to features, examples, and tags aligned with examples (as lists)
@@ -31,7 +33,8 @@ def get_acc(true_tags, predicted_tags):
             good += 1
         else:
             bad += 1
-    return round((good / (good + bad)) * 100, 2)
+    acc = float(good) / float(good + bad)
+    return float(math.ceil(acc * 100)) / float(100)
 
 
 # Initialize global utils variables

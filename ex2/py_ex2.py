@@ -75,6 +75,7 @@ def get_results_dt():
         tags_dtl.append(dt.predict(example))
     dt_acc = utils.get_acc(utils.tags_test, tags_dtl)
     tree = dt.get_constructed_dt(dt.root)
+    tree = tree[:len(tree) - 1]
     return dt_acc, tags_dtl, tree
 
 
